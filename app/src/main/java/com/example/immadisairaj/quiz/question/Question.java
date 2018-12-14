@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.immadisairaj.quiz.Home_screen;
 import com.example.immadisairaj.quiz.R;
 import com.example.immadisairaj.quiz.api.Api;
 import com.example.immadisairaj.quiz.api.QuizQuestions;
 import com.example.immadisairaj.quiz.api.Result;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,35 +24,35 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Question {
+public class Question implements  Serializable {
 
-    Context context;
-    Activity activity;
-
+    transient Context context;
     List<Result> results;
 
     public List<String> question;
+
+
     public List<String> optA;
     public List<String> optB;
     public List<String> optC;
     public List<String> optD;
     public List<Integer> Answer;
 
-    public void setQuestion(Context context, Activity activity) {
+    public Question(){
 
+    }
+    public Question(Context context){
         this.context = context;
-        this.activity = activity;
-
         question = new ArrayList<>();
+        results=new ArrayList<>();
         optA = new ArrayList<>();
         optB = new ArrayList<>();
         optC = new ArrayList<>();
         optD = new ArrayList<>();
         Answer = new ArrayList<>();
-
+    }
+    public void setQuestion() {
         fetchApi();
-
-
     }
 
     public void fetchApi() {
@@ -60,15 +62,11 @@ public class Question {
                 .build();
         Api api = retrofit.create(Api.class);
         Call<QuizQuestions> call = api.getQuizQuestions("url3986", 10, "medium", "multiple");
-
         call.enqueue(new Callback<QuizQuestions>() {
             @Override
             public void onResponse(Call<QuizQuestions> call, Response<QuizQuestions> response) {
 
-                Log.v("url", call.request().url().toString());
-
-                View loadingIndicator = activity.findViewById(R.id.loading_indicator);
-                loadingIndicator.setVisibility(View.INVISIBLE);
+                Log.v("url-----", call.request().url().toString());
 
                 QuizQuestions quizQuestions = response.body();
 
