@@ -1,9 +1,7 @@
 package com.example.immadisairaj.quiz;
 
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Home_screen extends AppCompatActivity  {
+public class HomeScreen extends AppCompatActivity  {
     Button start;
     ProgressBar progressBar;
     Question q;
@@ -91,7 +89,7 @@ public class Home_screen extends AppCompatActivity  {
                 }
                 progressBar.setVisibility(View.GONE);
                 start.setClickable(true);
-                Intent intent=new Intent(Home_screen.this,QuizActivity.class);
+                Intent intent=new Intent(HomeScreen.this,QuizActivity.class);
                 intent.putExtra("question",q);
                 startActivity(intent);
 
