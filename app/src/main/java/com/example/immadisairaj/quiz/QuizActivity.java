@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.example.immadisairaj.quiz.question.Question;
 
@@ -282,5 +284,9 @@ public class QuizActivity extends AppCompatActivity {
         solutions.putStringArrayListExtra("optD", (ArrayList<String>) qAndA.optD);
         solutions.putIntegerArrayListExtra("Answers", (ArrayList<Integer>) qAndA.Answer);
         startActivity(solutions);
+    }
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this,"Back Press is not allowed",Toast.LENGTH_LONG).show();
     }
 }
